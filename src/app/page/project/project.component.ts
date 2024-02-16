@@ -1,0 +1,54 @@
+import {Component, OnInit} from '@angular/core';
+import {Builder} from "../../utils/builder";
+import {AppService} from "../../services/app.service";
+import {Router} from "@angular/router";
+import {FormsModule, NgForm, ReactiveFormsModule} from "@angular/forms";
+import {ProjectDetails} from "../../models/project.model";
+import {EmailValidator} from "../../validators/email.validator";
+import {NgIf} from "@angular/common";
+import {NgbToast} from "@ng-bootstrap/ng-bootstrap";
+import {TranslateModule} from "@ngx-translate/core";
+
+@Component({
+  selector: 'app-project',
+  standalone: true,
+  imports: [
+    EmailValidator,
+    FormsModule,
+    NgIf,
+    NgbToast,
+    ReactiveFormsModule,
+    TranslateModule
+  ],
+  templateUrl: './project.component.html',
+  styleUrl: './project.component.scss'
+})
+export class ProjectComponent implements OnInit {
+
+  error: boolean = false;
+  projectDetails: ProjectDetails = Builder<ProjectDetails>().build();
+
+  constructor(private readonly appService: AppService,
+              private readonly route: Router) {
+  }
+
+  ngOnInit(): void {
+    this.appService.project$.subscribe(value => this.projectDetails = value);
+  }
+
+  onClickGoToSummary(projectDetailsForm: NgForm): void {
+    this.projectDetails.valid = <boolean>projectDetailsForm.valid;
+    if (projectDetailsForm.valid) {
+      this.appService.setProject(this.projectDetails);
+      void this.route.navigate(['summary']);
+    } else {
+      projectDetailsForm.control.markAllAsTouched();
+      this.error = true;
+    }
+  }
+
+  onClickGoBackToUserInfo(): void {
+    this.appService.setProject(this.projectDetails);
+    void this.route.navigate(['userInfo']);
+  }
+}

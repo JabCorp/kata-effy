@@ -1,0 +1,22 @@
+{
+  "civility-man": "Monsieur",
+  "civility-woman": "Madame",
+  "mr": "M.",
+  "mrs": "Mme",
+  "firstname": "Prénom",
+  "lastname": "Nom",
+  "email": "Email",
+  "phone": "Téléphone",
+  "next": "Suivant",
+  "validation-error": "Certains champs sont en erreur.",
+  "owner": "Propriétaire",
+  "tenant": "Locataire",
+  "income": "Revenu annuel du foyer",
+  "surface": "Surface en m²",
+  "people": "Nombre de personnes dans le foyer",
+  "previous": "Precedent",
+  "thank": "Merci {{civility}} {{lastname}} {{firstname}}",
+  "eligible": "Félicitations ! Vous êtes éligible  à notre programme d’aides et d’accompagnement.",
+  "eligible-amount": "Montant d’aides disponibles :",
+  "ineligible": "Malheureusement, vous n'êtes pas éligible à notre programme d’aides et d’accompagnement."
+}

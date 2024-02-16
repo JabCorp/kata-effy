@@ -1,0 +1,31 @@
+<div class="d-flex vh-100">
+  <div class="container m-auto text-center">
+    <h1>Titre Pertinent</h1>
+    <div class="" *ngIf="userInfo$ | async as userInfo">
+      <h2 class="">{{ 'thank' | translate:{
+        civility: userInfo.civility | translate | titlecase,
+        lastname: userInfo.lastName | uppercase,
+        firstname: userInfo.firstName | titlecase
+      } }}
+      </h2>
+    </div>
+    <div class="text-success" *ngIf=" eligibility && eligibility.eligible; else ineligible">
+      <p class="h3">{{ 'eligible' | translate }}</p>
+      <p class="h3">{{ 'eligible-amount' | translate }}</p>
+      <p class="h2">{{ eligibility.amount | currency:'EUR' : 'symbol-narrow': '1.2-2' : 'fr'}}</p>
+    </div>
+    <ng-template #ineligible>
+      <p class="h3 text-danger">
+        {{ 'ineligible' | translate }}
+      </p>
+    </ng-template>
+    <div class="">
+      <button type="button"
+              class="btn btn-outline-secondary"
+              (click)="onClickGoBackToProject()">
+        {{ 'previous' | translate}}
+      </button>
+    </div>
+  </div>
+</div>
+

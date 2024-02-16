@@ -1,0 +1,80 @@
+<div class="d-flex vh-100">
+  <div class="m-auto">
+    <h1>Titre Pertinent</h1>
+    <form #userInfoForm="ngForm" (ngSubmit)="onClickGoToProject(userInfoForm)" novalidate>
+      <div class="d-inline-flex">
+        <div class="form-check form-check-inline m-2">
+          <input type="radio"
+                 id="civility-man"
+                 name="civility"
+                 class="form-check-input"
+                 [value]="CIVILITY.MR"
+                 [(ngModel)]="userInfo.civility"
+                 required>
+          <label for="civility-man" class="form-check-label">{{ 'civility-man' | translate }}</label>
+        </div>
+        <div class="form-check m-2">
+          <input type="radio"
+                 id="civility-woman"
+                 name="civility"
+                 class="form-check-input"
+                 [value]="CIVILITY.MRS"
+                 [(ngModel)]="userInfo.civility"
+                 required>
+          <label for="civility-woman" class="form-check-label">{{ 'civility-woman' | translate }}</label>
+        </div>
+      </div>
+      <div class="form-floating m-2">
+        <input type="text"
+               id="lastname"
+               name="lastname"
+               class="form-control"
+               [(ngModel)]="userInfo.lastName"
+               required>
+        <label for="lastname">{{ 'lastname' | translate }}</label>
+      </div>
+      <div class="form-floating m-2">
+        <input type="text"
+               id="firstname"
+               name="firstname"
+               class="form-control"
+               [(ngModel)]="userInfo.firstName"
+               required>
+        <label for="firstname">{{ 'firstname' | translate }}</label>
+      </div>
+      <div class="form-floating m-2">
+        <input type="text"
+               id="email"
+               name="email"
+               class="form-control"
+               [(ngModel)]="userInfo.email"
+               appEmail
+               required>
+        <label for="email">{{ 'email' | translate }}</label>
+      </div>
+      <div class="form-floating m-2">
+        <input type="text"
+               id="phone"
+               name="phone"
+               class="form-control"
+               [(ngModel)]="userInfo.phoneNumber"
+               required>
+        <label for="phone">{{ 'phone' | translate }}</label>
+      </div>
+      <div class="m-2 text-end">
+        <button type="submit" class="btn btn-primary">
+          <span class="mx-2">{{ 'next' | translate}}</span>
+          <i class="bi bi-arrow-right-circle"></i>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<ngb-toast *ngIf="error"
+           class="toast-container position-fixed top-0 end-0 m-3 p-2 bg-danger text-light"
+           [delay]="5000"
+           (hidden)="error = false">
+  {{ 'validation-error' | translate}}
+</ngb-toast>
+

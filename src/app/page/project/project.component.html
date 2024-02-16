@@ -1,0 +1,82 @@
+<div class="d-flex vh-100">
+  <div class="container m-auto">
+    <h1>Titre Pertinent</h1>
+    <form #projectDetailsForm="ngForm">
+      <div class="d-inline-flex">
+        <div class="form-check form-check-inline m-2">
+          <input type="radio"
+                 id="owner"
+                 name="owner"
+                 class="form-check-input"
+                 value="true"
+                 [(ngModel)]="projectDetails.ownership"
+                 required>
+          <label for="owner" class="form-check-label">{{ 'owner' | translate }}</label>
+        </div>
+        <div class="form-check m-2">
+          <input type="radio"
+                 id="tenant"
+                 name="owner"
+                 class="form-check-input"
+                 value="false"
+                 [(ngModel)]="projectDetails.ownership"
+                 required>
+          <label for="tenant" class="form-check-label">{{ 'tenant' | translate }}</label>
+        </div>
+      </div>
+      <div class="form-floating m-2">
+        <input type="number"
+               id="people"
+               name="people"
+               class="form-control"
+               min="1"
+               [(ngModel)]="projectDetails.people"
+               required>
+        <label for="people">{{ 'people' | translate }}</label>
+      </div>
+      <div class="form-floating m-2">
+        <input type="number"
+               id="income"
+               name="income"
+               class="form-control"
+               min="10000"
+               max="100000"
+               [(ngModel)]="projectDetails.income"
+               required>
+        <label for="income">{{ 'income' | translate }}</label>
+      </div>
+      <div class="form-floating m-2">
+        <input type="number"
+               id="surface"
+               name="surface"
+               min="1"
+               class="form-control"
+               [(ngModel)]="projectDetails.surface"
+               required>
+        <label for="surface">{{ 'surface' | translate }}</label>
+      </div>
+      <div class="m-2">
+        <button type="button"
+                (click)="onClickGoBackToUserInfo()"
+                class="btn btn-outline-secondary float-start">
+          <i class="bi bi-arrow-left-circle"></i>
+          <span class="mx-2">{{ 'previous' | translate}}</span>
+        </button>
+        <button type="submit"
+                (click)="onClickGoToSummary(projectDetailsForm)"
+                class="btn btn-primary float-end">
+          <span class="mx-2">{{ 'next' | translate}}</span>
+          <i class="bi bi-arrow-right-circle"></i>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<ngb-toast *ngIf="error"
+           class="toast-container position-fixed top-0 end-0 m-3 p-2 bg-danger text-light"
+           [delay]="5000"
+           (hidden)="error = false">
+  {{ 'validation-error' | translate}}
+</ngb-toast>
+
