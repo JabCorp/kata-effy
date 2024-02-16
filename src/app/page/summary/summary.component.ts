@@ -1,8 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {Builder} from "../../utils/builder";
 import {UserInfo} from "../../models/userInfo.model";
 import {AppService} from "../../services/app.service";
-import {Observable, of} from "rxjs";
+import {Observable} from "rxjs";
 import {TranslateModule} from "@ngx-translate/core";
 import {AsyncPipe, CurrencyPipe, NgIf, TitleCasePipe, UpperCasePipe} from "@angular/common";
 import {Router} from "@angular/router";
@@ -25,7 +24,7 @@ import {Eligibility} from "../../models/eligibility.model";
 export class SummaryComponent implements OnInit {
 
   eligibility: Eligibility | null = null;
-  userInfo$: Observable<UserInfo> = of(Builder<UserInfo>().build());
+  userInfo$: Observable<UserInfo> | null = null;
 
   constructor(private readonly router: Router,
               private readonly appService: AppService) {

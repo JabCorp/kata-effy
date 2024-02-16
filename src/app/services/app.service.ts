@@ -8,7 +8,7 @@ import {Eligibility} from "../models/eligibility.model";
 @Injectable({
   providedIn: 'root'
 })
-export class AppService {
+export class  AppService {
 
   private readonly SURFACE_UNITARY_PRICE = 80;
   private readonly PROJECT_COST_MULTIPLIER = 0.75;
@@ -37,7 +37,7 @@ export class AppService {
   }
 
   private calculateIncomeByPerson(project: ProjectDetails) {
-    return project.income / project.people;
+    return project && project.income && project.people ? project.income / project.people : 0;
   }
 
   private calculateIncomeByPersonWithMultiplier(project: ProjectDetails) {
@@ -50,8 +50,9 @@ export class AppService {
   }
 
   calculateEligibility(): Eligibility {
-    const amount = this.calculateEffyAid();
-    const eligible = amount > 0 && this.currentProject.getValue().ownership;
+    const owner = this.currentProject.getValue().ownership
+    const amount = owner ? this.calculateEffyAid() : 0;
+    const eligible = owner && amount > 0 ;
     return Builder<Eligibility>().eligible(eligible).amount(amount).build();
   }
 

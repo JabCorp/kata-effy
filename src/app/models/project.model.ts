@@ -1,5 +1,5 @@
 export interface ProjectDetails {
-  valid: boolean;
+  valid?: boolean;
   ownership: boolean;
   people: number;
   income: number;

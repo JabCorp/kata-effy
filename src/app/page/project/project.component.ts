@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Builder} from "../../utils/builder";
 import {AppService} from "../../services/app.service";
 import {Router} from "@angular/router";
@@ -8,6 +8,7 @@ import {EmailValidator} from "../../validators/email.validator";
 import {NgIf} from "@angular/common";
 import {NgbToast} from "@ng-bootstrap/ng-bootstrap";
 import {TranslateModule} from "@ngx-translate/core";
+import {Subject, takeUntil} from "rxjs";
 
 @Component({
   selector: 'app-project',
@@ -23,17 +24,23 @@ import {TranslateModule} from "@ngx-translate/core";
   templateUrl: './project.component.html',
   styleUrl: './project.component.scss'
 })
-export class ProjectComponent implements OnInit {
+export class ProjectComponent implements OnInit, OnDestroy {
 
   error: boolean = false;
   projectDetails: ProjectDetails = Builder<ProjectDetails>().build();
+  private readonly destroy$ = new Subject<void>()
 
   constructor(private readonly appService: AppService,
               private readonly route: Router) {
   }
 
   ngOnInit(): void {
-    this.appService.project$.subscribe(value => this.projectDetails = value);
+    this.appService.project$.pipe(takeUntil(this.destroy$)).subscribe(value => this.projectDetails = value);
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   onClickGoToSummary(projectDetailsForm: NgForm): void {

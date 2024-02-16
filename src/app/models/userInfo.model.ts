@@ -1,10 +1,10 @@
 export interface UserInfo {
-  civility: Civility;
-  firstName: string;
-  lastName: string;
-  email: string;
-  phoneNumber: string;
-  valid: boolean
+  civility?: Civility;
+  firstName?: string;
+  lastName?: string;
+  email?: string;
+  phoneNumber?: string;
+  valid?: boolean
 }
 
 export enum Civility {

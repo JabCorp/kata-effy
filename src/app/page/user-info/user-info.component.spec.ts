@@ -23,9 +23,8 @@ describe('UserInfoComponent', () => {
     component = spectator.component;
   });
 
-  it('should create', () => {
+  test('should create an instance', () => {
     spectator = createComponent();
-
     expect(spectator.component).toBeTruthy();
   });
 });
