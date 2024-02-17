@@ -9,11 +9,13 @@
       } }}
       </h2>
     </div>
-    <div class="text-success" *ngIf=" eligibility && eligibility.eligible; else ineligible">
+    <ng-template [ngIf]="eligibility && eligibility.eligible" [ngIfElse]="ineligible">
+    <div class="text-success">
       <p class="h3">{{ 'eligible' | translate }}</p>
       <p class="h3">{{ 'eligible-amount' | translate }}</p>
       <p class="h2">{{ eligibility.amount | currency:'EUR' : 'symbol-narrow': '1.2-2' : 'fr'}}</p>
     </div>
+    </ng-template>
     <ng-template #ineligible>
       <p class="h3 text-danger">
         {{ 'ineligible' | translate }}
