@@ -3,7 +3,7 @@ import {AppService} from './app.service';
 import {ProjectDetails} from "../models/project.model";
 import {Eligibility} from "../models/eligibility.model";
 import {lastValueFrom, take} from "rxjs";
-import {UserInfo} from "../models/userInfo.model";
+import {Civility, UserInfo} from "../models/userInfo.model";
 
 describe('AppService', () => {
   let service: AppService;
@@ -41,6 +41,8 @@ describe('AppService', () => {
       firstName: 'John',
       lastName: 'Doe',
       email: 'n9jLc@example.com',
+      civility: Civility.MR,
+      phoneNumber: '123456789'
     }
     // When
     service.setUserInfo(userInfo)

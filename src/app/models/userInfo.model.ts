@@ -1,9 +1,9 @@
 export interface UserInfo {
-  civility?: Civility;
-  firstName?: string;
-  lastName?: string;
-  email?: string;
-  phoneNumber?: string;
+  civility: Civility;
+  firstName: string;
+  lastName: string;
+  email: string;
+  phoneNumber: string;
   valid?: boolean
 }
 
